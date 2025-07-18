@@ -1,30 +1,30 @@
 import { useEffect } from 'react';
 
 type UseAsideOutsideClickCloseProps = {
-	isOpen: boolean;
 	asideRef: React.RefObject<HTMLElement>;
-	setIsOpen: (isOpen: boolean) => void;
+	isMenuOpen: boolean;
+	setIsMenuOpen: (isOpen: boolean) => void;
 };
 
 export const UseAsideOutsideClickClose = ({
-	isOpen,
 	asideRef,
-	setIsOpen,
+	isMenuOpen,
+	setIsMenuOpen,
 }: UseAsideOutsideClickCloseProps) => {
 	useEffect(() => {
 		const handleClick = (event: MouseEvent) => {
 			const { target } = event;
 			if (target instanceof Node && !asideRef.current?.contains(target)) {
-				setIsOpen(false);
+				setIsMenuOpen(false);
 			}
 		};
 
-		if (isOpen) {
+		if (isMenuOpen) {
 			window.addEventListener('mousedown', handleClick);
 		}
 
 		return () => {
 			window.removeEventListener('mousedown', handleClick);
 		};
-	}, [isOpen, asideRef, setIsOpen]);
+	}, [isMenuOpen, asideRef, setIsMenuOpen]);
 };

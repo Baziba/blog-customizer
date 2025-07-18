@@ -30,7 +30,7 @@ export const ArticleParamsForm = ({
 	defaultArticleState,
 }: ArticleParamsFormProps) => {
 	const asideRef = useRef<HTMLDivElement>(null);
-	const [isOpen, setIsOpen] = useState<boolean>(false);
+	const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 	const [filterState, setFilterState] =
 		useState<ArticleStateType>(defaultArticleState);
 
@@ -38,7 +38,7 @@ export const ArticleParamsForm = ({
 	 * Переключение видимости формы
 	 */
 	function toggle() {
-		setIsOpen(!isOpen);
+		setIsMenuOpen(!isMenuOpen);
 	}
 
 	/**
@@ -68,17 +68,17 @@ export const ArticleParamsForm = ({
 	};
 
 	UseAsideOutsideClickClose({
-		isOpen,
 		asideRef,
-		setIsOpen,
+		isMenuOpen,
+		setIsMenuOpen,
 	});
 
 	return (
 		<>
-			<ArrowButton isOpen={isOpen} onClick={toggle} />
+			<ArrowButton isOpen={isMenuOpen} onClick={toggle} />
 			<aside
 				ref={asideRef}
-				className={clsx(styles.container, isOpen && styles.container_open)}>
+				className={clsx(styles.container, isMenuOpen && styles.container_open)}>
 				<form className={styles.form} onSubmit={onSubmit} onReset={onReset}>
 					<Text size={31} weight={800} uppercase>
 						Задайте параметры
